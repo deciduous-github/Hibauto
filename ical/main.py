@@ -1,26 +1,22 @@
 import codecs
+import pandas as pd
 
 from icalendar import Calendar
 
-ical_pass = "iCalender.ics"
-
 
 def ical():
-    fin = codecs.open(ical_pass)
+    fin = codecs.open("iCalender.ics")
     cal = Calendar.from_ical(fin.read())
     fin.close()
     li = []
     for ev in cal.walk():
         if ev.name == 'VEVENT':
             start_dt = ev.decoded("dtstart")
-            end_dt = ev.decoded("dtend")
             summary = ev['summary'].encode('utf-8')
-            summary2 = summary.decode().replace('\u3000', '')
-            summary3 = ','.join([x.strip() for x in summary2.split(' ')])
-            # todo 別ファイルに例外処理をまとめるファイルを作りたい。.replace('\u3000', '')
-            li.append("{start},{end},{summary}".format(start=start_dt.strftime("%Y/%m/%d"),
-                                                       end=end_dt.strftime("%Y/%m/%d"),
-                                                       summary=summary3))
+            summary_decode = summary.decode()
+            summary_split = ','.join([x.strip() for x in summary_decode.split(' ')])
+            li.append("{start},{summary}".format(start=start_dt.strftime("%Y/%m/%d"),
+                                                 summary=summary_split))
 
     ical_csv_pass = "ical.csv"
     f = codecs.open(ical_csv_pass, "w")
@@ -29,6 +25,16 @@ def ical():
     f.close()
 
 
+def read_ical_csv():
+    # todo ical.csvがあるか判断してから読み込み
+    col_names = ["date", "artist", "place", "Contents", 'over', 'over2', 'over3','over4']
+    data = pd.read_csv('ical.csv', encoding="utf-8", names=col_names)
+    return data
+
+
+ical_df = read_ical_csv()
+
 if __name__ == '__main__':
-    ical()
     print("mainで実行中")
+    # ical()
+    read_ical_csv()
