@@ -1,7 +1,9 @@
 import codecs
+
 from icalendar import Calendar
 
 ical_pass = "iCalender.ics"
+
 
 def ical():
     fin = codecs.open(ical_pass)
@@ -25,6 +27,7 @@ def ical():
     for ld in li:
         f.write(ld + "\n")
     f.close()
+
 
 if __name__ == '__main__':
     ical()
