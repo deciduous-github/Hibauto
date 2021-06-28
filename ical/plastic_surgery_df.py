@@ -8,7 +8,7 @@ blank_between_artists_list = ['鈴木\u3000雅之',
 place_2_frames_list = ['KT Zepp横浜',
                        'ZEPP 札幌',
                        'ZEPP 名古屋',
-                       'ZEPP Haneda',
+                       'Zepp Haneda',
                        '東広島芸術文化ホール くらら',
                        ]
 
@@ -33,6 +33,20 @@ class Artist(object):
                     data[1] = j.replace('\u3000', '')
                     df_ical_loc(index, data)
 
+    @staticmethod
+    def olympic_frame(data):
+        data[1] = data[1] + data[2]
+        data[2] = data[3]
+        data[3] = data[4]
+        data[4] = np.nan
+
+    @staticmethod
+    def olympic():
+        for index, data in ical_df.iterrows():
+            if data['artist'] == 'ｵﾘ':
+                Artist.olympic_frame(data)
+                df_ical_loc(index, data)
+
 
 class Place(object):
 
@@ -50,7 +64,7 @@ class Place(object):
 
     @staticmethod
     def over_column():
-        for index, data in ical_df.dropna(subset=['over']).iterrows():
+        for index, data in ical_df.dropna(subset=['contents']).iterrows():
             for i in range(len(place_2_frames_list)):
                 b = place_2_frames_list[i].split(' ')
                 if data['place'] == b[0] and data['contents'] == b[1]:
@@ -69,4 +83,4 @@ class Place(object):
 if __name__ == '__main__':
     Place.over_column()
     Artist.blank_between_artists()
-    print(ical_df.dropna(how='all', axis=1))
+    Artist.olympic()
