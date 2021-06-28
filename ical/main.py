@@ -27,7 +27,7 @@ def ical():
 
 def read_ical_csv():
     # todo ical.csvがあるか判断してから読み込み
-    col_names = ["date", "artist", "place", "Contents", 'over', 'over2', 'over3','over4']
+    col_names = ["date", "artist", "place", "contents", 'over', 'over2', 'over3', 'over4']
     data = pd.read_csv('ical.csv', encoding="utf-8", names=col_names)
     return data
 
