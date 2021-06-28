@@ -8,6 +8,7 @@ blank_between_artists_list = ['鈴木\u3000雅之',
 place_2_frames_list = ['KT Zepp横浜',
                        'ZEPP 札幌',
                        'ZEPP 名古屋',
+                       'ZEPP 福岡',
                        'Zepp Haneda',
                        '東広島芸術文化ホール くらら',
                        ]
@@ -84,3 +85,4 @@ if __name__ == '__main__':
     Place.over_column()
     Artist.blank_between_artists()
     Artist.olympic()
+    print('test')
