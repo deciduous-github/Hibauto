@@ -15,3 +15,5 @@ RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
 RUN pip install icalendar
 RUN pip install pandas
+RUN pip install selenium
+RUN pip install webdriver_manager

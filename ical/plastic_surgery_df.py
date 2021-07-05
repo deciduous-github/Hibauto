@@ -1,6 +1,6 @@
-import pandas as pd
 import numpy as np
-from main import ical_df, col_names
+
+from ical.main import ical_df, col_names
 
 blank_between_artists_list = ['鈴木\u3000雅之',
                               '岡村\u3000靖幸']
@@ -85,4 +85,4 @@ if __name__ == '__main__':
     Place.over_column()
     Artist.blank_between_artists()
     Artist.olympic()
-    print('test')
+    print("test")

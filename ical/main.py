@@ -38,5 +38,5 @@ ical_df = read_ical_csv()
 
 if __name__ == '__main__':
     print("mainで実行中")
-    # ical()
+    ical()
     read_ical_csv()
